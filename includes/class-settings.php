@@ -102,6 +102,24 @@ class Settings {
 			'ailm_selectors_section'
 		);
 
+		register_setting(
+			$this->option_group,
+			OPT_HIJACK_IMAGE_LINKS,
+			array(
+				'type'              => 'boolean',
+				'sanitize_callback' => array( $this, 'sanitize_hijack_image_links' ),
+				'default'           => DEF_HIJACK_IMAGE_LINKS,
+			)
+		);
+
+		add_settings_field(
+			'ailm_hijack_image_links_field',
+			__( 'Hijack Image Links', 'auto-image-link-maker' ),
+			array( $this, 'render_hijack_image_links_field' ),
+			$this->page_slug,
+			'ailm_selectors_section'
+		);
+
 		add_settings_section(
 			'ailm_page_types_section',
 			__( 'Page Types', 'auto-image-link-maker' ),
@@ -160,6 +178,41 @@ class Settings {
 			esc_textarea( $value ),
 			esc_html__( 'Example: #main img, .entry-content img, .wp-block-table img', 'auto-image-link-maker' )
 		);
+	}
+
+	/**
+	 * Render the hijack image links checkbox field.
+	 *
+	 * @since 0.3.0
+	 *
+	 * @return void
+	 */
+	public function render_hijack_image_links_field(): void {
+		$value = (bool) filter_var(
+			get_option( OPT_HIJACK_IMAGE_LINKS, DEF_HIJACK_IMAGE_LINKS ),
+			FILTER_VALIDATE_BOOLEAN
+		);
+
+		printf(
+			'<label><input type="checkbox" name="%s" value="1" %s /> %s</label><p class="description">%s</p>',
+			esc_attr( OPT_HIJACK_IMAGE_LINKS ),
+			checked( $value, true, false ),
+			esc_html__( 'Open existing image links in the lightbox', 'auto-image-link-maker' ),
+			esc_html__( 'When enabled, images that already link to an image file will open in the lightbox instead of navigating to the file. Links to non-image content (e.g. posts) are not affected.', 'auto-image-link-maker' )
+		);
+	}
+
+	/**
+	 * Sanitize the hijack image links checkbox input.
+	 *
+	 * @since 0.3.0
+	 *
+	 * @param mixed $input Raw input from the form.
+	 *
+	 * @return bool Sanitized boolean value.
+	 */
+	public function sanitize_hijack_image_links( mixed $input ): bool {
+		return (bool) filter_var( $input, FILTER_VALIDATE_BOOLEAN );
 	}
 
 	/**

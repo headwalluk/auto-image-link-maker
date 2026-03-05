@@ -2,6 +2,19 @@
 
 All notable changes to Auto Image Link Maker will be documented in this file.
 
+## [0.4.0] - 2026-03-05
+
+### Added
+
+- Option to hijack existing image links so they open in the lightbox instead of navigating to the raw file.
+- New setting: "Hijack Image Links" under CSS Selectors section (enabled by default).
+- Links to non-image content (e.g. posts, pages) are left untouched.
+- GPLv2 LICENSE file.
+
+### Changed
+
+- PHP requirement updated to 8.0+.
+
 ## [0.3.0] - 2026-03-05
 
 ### Added

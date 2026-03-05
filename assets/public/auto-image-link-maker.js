@@ -4,6 +4,9 @@
  * Wraps images that are not already inside an anchor tag
  * with a link to their source, then opens them in a GLightbox lightbox.
  *
+ * Optionally hijacks existing image links (links whose href points to an
+ * image file) so they open in the lightbox instead of navigating away.
+ *
  * @package Auto_Image_Link_Maker
  */
 
@@ -16,6 +19,24 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 	if ( ! selector ) {
 		return;
+	}
+
+	var imageExtensions = /\.(jpe?g|png|gif|webp|svg|avif|bmp|tiff?)(\?.*)?$/i;
+
+	/**
+	 * Check whether a URL points to an image file.
+	 *
+	 * @param {string} url The URL to test.
+	 * @return {boolean} True if the URL ends with a known image extension.
+	 */
+	function isImageUrl( url ) {
+		if ( ! url ) {
+			return false;
+		}
+
+		// Strip any hash fragment before testing.
+		var clean = url.split( '#' )[0];
+		return imageExtensions.test( clean );
 	}
 
 	/**
@@ -62,7 +83,15 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	var images = document.querySelectorAll( selector );
 
 	images.forEach( function( img ) {
-		if ( img.closest( 'a' ) ) {
+		var existingAnchor = img.closest( 'a' );
+
+		if ( existingAnchor ) {
+			// If hijack is enabled and the link points to an image, add GLightbox.
+			if ( ailmData.hijackImageLinks && isImageUrl( existingAnchor.getAttribute( 'href' ) ) ) {
+				existingAnchor.setAttribute( 'href', getFullSizeUrl( img ) );
+				existingAnchor.classList.add( 'glightbox' );
+				existingAnchor.classList.add( 'ailm-hijacked' );
+			}
 			return;
 		}
 

@@ -1,6 +1,6 @@
 # Project Tracker
 
-**Version:** 0.2.0
+**Version:** 0.4.0
 **Last Updated:** 5 March 2026
 **Current Phase:** Complete
 **Overall Progress:** 100%
@@ -15,7 +15,7 @@ WordPress plugin that automatically wraps unwrapped images in clickable anchor l
 
 ## Active TODO Items
 
-None — v1.0.0 complete.
+None — testing on client site.
 
 ---
 
@@ -59,6 +59,16 @@ None — v1.0.0 complete.
 - [x] Verify script does not load on disabled page types (search confirmed)
 - [x] Note: static front page matches is_page() — this is correct WP behaviour
 
+### Milestone 6: Hijack Existing Image Links (DONE)
+
+- [x] New constant OPT_HIJACK_IMAGE_LINKS / DEF_HIJACK_IMAGE_LINKS
+- [x] Settings field: checkbox to enable/disable hijacking
+- [x] JS: detect existing anchors whose href points to an image file
+- [x] JS: add glightbox class and update href to full-size URL
+- [x] JS: leave non-image links untouched
+- [x] Pass setting to front-end via wp_localize_script
+- [x] Tested on dev site
+
 ### Milestone 5: Polish and Release (DONE)
 
 - [x] Review all PHP against phpcs (zero violations)
@@ -79,5 +89,5 @@ None yet.
 
 - GLightbox 3.3.1 is bundled in `assets/vendor/glightbox/` (MIT licence).
 - Front-end JS is vanilla — no jQuery dependency.
-- Settings are stored in two wp_options: `ailm_css_selectors` (string) and `ailm_page_types` (array).
+- Settings are stored in three wp_options: `ailm_css_selectors` (string), `ailm_page_types` (array), `ailm_hijack_image_links` (boolean).
 - Dev site: `http://bench3.local/`

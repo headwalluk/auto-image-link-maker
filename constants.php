@@ -10,11 +10,13 @@ namespace Auto_Image_Link_Maker;
 defined( 'ABSPATH' ) || die();
 
 // wp_options keys.
-const OPT_CSS_SELECTORS = 'ailm_css_selectors';
-const OPT_PAGE_TYPES    = 'ailm_page_types';
+const OPT_CSS_SELECTORS      = 'ailm_css_selectors';
+const OPT_PAGE_TYPES         = 'ailm_page_types';
+const OPT_HIJACK_IMAGE_LINKS = 'ailm_hijack_image_links';
 
 // Default values.
-const DEF_CSS_SELECTORS = "#main img\n.entry-content img";
+const DEF_CSS_SELECTORS      = "#main img\n.entry-content img";
+const DEF_HIJACK_IMAGE_LINKS = true;
 
 const DEF_PAGE_TYPES = array(
 	'is_single'     => true,

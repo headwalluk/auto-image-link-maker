@@ -103,11 +103,17 @@ class Plugin {
 				true
 			);
 
+			$hijack_image_links = (bool) filter_var(
+				get_option( OPT_HIJACK_IMAGE_LINKS, DEF_HIJACK_IMAGE_LINKS ),
+				FILTER_VALIDATE_BOOLEAN
+			);
+
 			wp_localize_script(
 				'ailm-front',
 				'ailmData',
 				array(
-					'selectors' => $selectors,
+					'selectors'        => $selectors,
+					'hijackImageLinks' => $hijack_image_links,
 				)
 			);
 		}
