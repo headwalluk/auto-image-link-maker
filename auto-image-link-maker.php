@@ -3,7 +3,7 @@
  * Plugin Name: Auto Image Link Maker
  * Plugin URI:  https://headwall-hosting.com/plugins/auto-image-lightbox-plugins-for-wordpress/
  * Description: Automatically wraps unwrapped images in clickable anchor links.
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      Paul Faulkner
  * Author URI:  https://headwall-hosting.com
  * License:     GPL v2 or later
@@ -18,7 +18,7 @@
 defined( 'ABSPATH' ) || die();
 
 define( 'AILM_NAME', 'Auto Image Link Maker' );
-define( 'AILM_VERSION', '1.0.1' );
+define( 'AILM_VERSION', '1.0.2' );
 define( 'AILM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AILM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 

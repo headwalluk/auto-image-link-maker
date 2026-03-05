@@ -297,6 +297,7 @@ class Plugin {
 		foreach ( $checks as $key => $func ) {
 			if ( ! empty( $page_types[ $key ] ) && (bool) filter_var( $page_types[ $key ], FILTER_VALIDATE_BOOLEAN ) && $func() ) {
 				$enabled = true;
+				break;
 			}
 		}
 

@@ -2,6 +2,13 @@
 
 All notable changes to Auto Image Link Maker will be documented in this file.
 
+## [1.0.2] - 2026-03-05
+
+### Changed
+
+- Consolidated duplicate boolean sanitize callbacks into a single `sanitize_boolean` method.
+- Added early break in page type matching loop for efficiency.
+
 ## [1.0.1] - 2026-03-05
 
 ### Changed

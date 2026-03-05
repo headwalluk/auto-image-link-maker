@@ -125,7 +125,7 @@ class Settings {
 			OPT_HIJACK_IMAGE_LINKS,
 			array(
 				'type'              => 'boolean',
-				'sanitize_callback' => array( $this, 'sanitize_hijack_image_links' ),
+				'sanitize_callback' => array( $this, 'sanitize_boolean' ),
 				'default'           => DEF_HIJACK_IMAGE_LINKS,
 			)
 		);
@@ -143,7 +143,7 @@ class Settings {
 			OPT_SKIP_EMOJI,
 			array(
 				'type'              => 'boolean',
-				'sanitize_callback' => array( $this, 'sanitize_skip_emoji' ),
+				'sanitize_callback' => array( $this, 'sanitize_boolean' ),
 				'default'           => DEF_SKIP_EMOJI,
 			)
 		);
@@ -344,19 +344,6 @@ class Settings {
 	}
 
 	/**
-	 * Sanitize the hijack image links checkbox input.
-	 *
-	 * @since 0.3.0
-	 *
-	 * @param mixed $input Raw input from the form.
-	 *
-	 * @return bool Sanitized boolean value.
-	 */
-	public function sanitize_hijack_image_links( mixed $input ): bool {
-		return (bool) filter_var( $input, FILTER_VALIDATE_BOOLEAN );
-	}
-
-	/**
 	 * Render the gallery grouping section description.
 	 *
 	 * @since 0.6.0
@@ -499,19 +486,6 @@ class Settings {
 			esc_textarea( $value ),
 			esc_html__( 'CSS selectors that identify emoji images. One selector per line. WordPress uses img.wp-smiley and img.emoji by default.', 'auto-image-link-maker' )
 		);
-	}
-
-	/**
-	 * Sanitize the skip emoji checkbox input.
-	 *
-	 * @since 0.4.0
-	 *
-	 * @param mixed $input Raw input from the form.
-	 *
-	 * @return bool Sanitized boolean value.
-	 */
-	public function sanitize_skip_emoji( mixed $input ): bool {
-		return (bool) filter_var( $input, FILTER_VALIDATE_BOOLEAN );
 	}
 
 	/**

@@ -1,6 +1,6 @@
 # Auto Image Link Maker
 
-![Version](https://img.shields.io/badge/version-1.0.1-blue)
+![Version](https://img.shields.io/badge/version-1.0.2-blue)
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b?logo=wordpress)
 ![PHP](https://img.shields.io/badge/PHP-8.0%2B-777bb4?logo=php&logoColor=white)
 ![License](https://img.shields.io/badge/license-GPLv2-green)
