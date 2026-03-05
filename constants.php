@@ -13,10 +13,16 @@ defined( 'ABSPATH' ) || die();
 const OPT_CSS_SELECTORS      = 'ailm_css_selectors';
 const OPT_PAGE_TYPES         = 'ailm_page_types';
 const OPT_HIJACK_IMAGE_LINKS = 'ailm_hijack_image_links';
+const OPT_EXCLUDE_SELECTORS  = 'ailm_exclude_selectors';
+const OPT_SKIP_EMOJI         = 'ailm_skip_emoji';
+const OPT_EMOJI_SELECTORS    = 'ailm_emoji_selectors';
 
 // Default values.
 const DEF_CSS_SELECTORS      = "#main img\n.entry-content img";
 const DEF_HIJACK_IMAGE_LINKS = true;
+const DEF_EXCLUDE_SELECTORS  = ".site-logo img\n.custom-logo\n.avatar";
+const DEF_SKIP_EMOJI         = true;
+const DEF_EMOJI_SELECTORS    = "img.wp-smiley\nimg.emoji";
 
 const DEF_PAGE_TYPES = array(
 	'is_single'     => true,

@@ -2,6 +2,15 @@
 
 All notable changes to Auto Image Link Maker will be documented in this file.
 
+## [0.5.0] - 2026-03-05
+
+### Added
+
+- Settings link on the Plugins page for quick access to configuration.
+- Exclude Selectors setting: textarea to specify images that should be skipped (e.g. `.site-logo img`, `.avatar`).
+- Emoji exclusion: checkbox to skip emoji images, with configurable emoji selectors (default: `img.wp-smiley`, `img.emoji`).
+- `uninstall.php` to clean up all `ailm_*` options from `wp_options` on plugin deletion.
+
 ## [0.4.0] - 2026-03-05
 
 ### Added

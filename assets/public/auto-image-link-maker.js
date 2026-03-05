@@ -80,9 +80,43 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		return stripped;
 	}
 
+	/**
+	 * Check whether an image element matches any of the exclude selectors.
+	 *
+	 * @param {HTMLImageElement} img The image element to test.
+	 * @return {boolean} True if the image should be excluded.
+	 */
+	function isExcluded( img ) {
+		if ( ! ailmData.excludeSelectors || ! ailmData.excludeSelectors.length ) {
+			return false;
+		}
+
+		var excludeSelector = ailmData.excludeSelectors.join( ', ' );
+		return img.matches( excludeSelector );
+	}
+
+	/**
+	 * Check whether an image element matches any of the emoji selectors.
+	 *
+	 * @param {HTMLImageElement} img The image element to test.
+	 * @return {boolean} True if the image matches an emoji selector.
+	 */
+	function isEmoji( img ) {
+		if ( ! ailmData.skipEmoji || ! ailmData.emojiSelectors || ! ailmData.emojiSelectors.length ) {
+			return false;
+		}
+
+		var emojiSelector = ailmData.emojiSelectors.join( ', ' );
+		return img.matches( emojiSelector );
+	}
+
 	var images = document.querySelectorAll( selector );
 
 	images.forEach( function( img ) {
+		if ( isExcluded( img ) || isEmoji( img ) ) {
+			return;
+		}
+
 		var existingAnchor = img.closest( 'a' );
 
 		if ( existingAnchor ) {

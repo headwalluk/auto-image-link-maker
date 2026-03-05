@@ -34,6 +34,28 @@ class Plugin {
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 		$this->get_settings()->register_hooks();
 		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_script' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( \AILM_PLUGIN_DIR . 'auto-image-link-maker.php' ), array( $this, 'add_settings_link' ) );
+	}
+
+	/**
+	 * Add a Settings link to the plugin action links on the Plugins page.
+	 *
+	 * @since 0.5.0
+	 *
+	 * @param array<string> $links Existing action links.
+	 *
+	 * @return array<string> Modified action links.
+	 */
+	public function add_settings_link( array $links ): array {
+		$settings_link = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( admin_url( 'options-general.php?page=ailm-settings' ) ),
+			esc_html__( 'Settings', 'auto-image-link-maker' )
+		);
+
+		array_unshift( $links, $settings_link );
+
+		return $links;
 	}
 
 	/**
@@ -103,17 +125,33 @@ class Plugin {
 				true
 			);
 
+			$exclude_raw       = get_option( OPT_EXCLUDE_SELECTORS, DEF_EXCLUDE_SELECTORS );
+			$exclude_selectors = array_filter( array_map( 'trim', explode( "\n", $exclude_raw ) ) );
+
 			$hijack_image_links = (bool) filter_var(
 				get_option( OPT_HIJACK_IMAGE_LINKS, DEF_HIJACK_IMAGE_LINKS ),
 				FILTER_VALIDATE_BOOLEAN
 			);
+
+			$skip_emoji      = (bool) filter_var(
+				get_option( OPT_SKIP_EMOJI, DEF_SKIP_EMOJI ),
+				FILTER_VALIDATE_BOOLEAN
+			);
+			$emoji_selectors = array();
+			if ( $skip_emoji ) {
+				$emoji_raw       = get_option( OPT_EMOJI_SELECTORS, DEF_EMOJI_SELECTORS );
+				$emoji_selectors = array_filter( array_map( 'trim', explode( "\n", $emoji_raw ) ) );
+			}
 
 			wp_localize_script(
 				'ailm-front',
 				'ailmData',
 				array(
 					'selectors'        => $selectors,
+					'excludeSelectors' => $exclude_selectors,
 					'hijackImageLinks' => $hijack_image_links,
+					'skipEmoji'        => $skip_emoji,
+					'emojiSelectors'   => $emoji_selectors,
 				)
 			);
 		}

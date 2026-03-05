@@ -1,6 +1,6 @@
 # Project Tracker
 
-**Version:** 0.4.0
+**Version:** 0.5.0
 **Last Updated:** 5 March 2026
 **Current Phase:** Complete
 **Overall Progress:** 100%
@@ -59,6 +59,13 @@ None — testing on client site.
 - [x] Verify script does not load on disabled page types (search confirmed)
 - [x] Note: static front page matches is_page() — this is correct WP behaviour
 
+### Milestone 5: Polish and Release (DONE)
+
+- [x] Review all PHP against phpcs (zero violations)
+- [x] Review JS for edge cases and browser compatibility
+- [x] Final update to README.md, readme.txt, and CHANGELOG.md
+- [x] Update CLAUDE.md with GLightbox and vendor directory info
+
 ### Milestone 6: Hijack Existing Image Links (DONE)
 
 - [x] New constant OPT_HIJACK_IMAGE_LINKS / DEF_HIJACK_IMAGE_LINKS
@@ -69,13 +76,26 @@ None — testing on client site.
 - [x] Pass setting to front-end via wp_localize_script
 - [x] Tested on dev site
 
-### Milestone 5: Polish and Release (DONE)
+### Milestone 7: Emoji Exclusion (DONE)
 
-- [x] Review all PHP against phpcs (zero violations)
-- [x] Review JS for edge cases and browser compatibility
-- [x] Final update to README.md, readme.txt, and CHANGELOG.md
-- [x] Update version to 1.0.0 across all files
-- [x] Update CLAUDE.md with GLightbox and vendor directory info
+- [x] New constants OPT_SKIP_EMOJI / OPT_EMOJI_SELECTORS with defaults
+- [x] Settings section: "Emoji Exclusions" with checkbox and selectors textarea
+- [x] JS: isEmoji() check using element.matches() against configurable selectors
+- [x] Default selectors: img.wp-smiley, img.emoji
+
+### Milestone 8: Quality of Life (DONE)
+
+- [x] Settings link on Plugins page
+- [x] uninstall.php to clean up all ailm_* options on plugin deletion
+- [x] Exclude selectors: textarea for images to skip (e.g. .site-logo img, .avatar)
+- [x] JS: isExcluded() check before processing each image
+
+### Milestone 9: Gallery Mode (FUTURE — may or may not implement)
+
+- [ ] Group lightbox images per container (e.g. per table) for swipe navigation
+- [ ] Add setting to enable/disable gallery grouping
+- [ ] Determine grouping strategy (closest common ancestor, or explicit container selector)
+- [ ] Add GLightbox gallery name attribute to grouped anchors
 
 ---
 
@@ -89,5 +109,6 @@ None yet.
 
 - GLightbox 3.3.1 is bundled in `assets/vendor/glightbox/` (MIT licence).
 - Front-end JS is vanilla — no jQuery dependency.
-- Settings are stored in three wp_options: `ailm_css_selectors` (string), `ailm_page_types` (array), `ailm_hijack_image_links` (boolean).
+- Settings stored in wp_options: `ailm_css_selectors`, `ailm_page_types`, `ailm_hijack_image_links`, `ailm_skip_emoji`, `ailm_emoji_selectors`, `ailm_exclude_selectors`.
+- All options cleaned up by `uninstall.php` on plugin deletion.
 - Dev site: `http://bench3.local/`
